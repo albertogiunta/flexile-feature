@@ -13,16 +13,16 @@ interface Props {
 const { services } = Astro.props;
 ---
 
-<section class="py-8 px-4 overflow-x-auto bg-white text-black w-full">
-  <div class="mx-auto max-w-4xl">
+<section class="py-8 px-4 bg-white text-black w-full">
+  <div class="mx-auto max-w-6xl">
     <h1 class="text-3xl font-bold mb-6 text-center">Buy my time</h1>
 
-    <div class="flex justify-center space-x-6">
+    <div class="flex flex-wrap justify-center gap-6">
       {
         services.map((service) => (
           <a
             href="#"
-            class={`p-6 flex flex-col justify-between z-10 relative overflow-hidden transition-all duration-300 ease-in-out ${service.highlighted ? "" : ""}`}
+            class={`p-6 flex flex-col justify-between z-10 relative overflow-hidden transition-all duration-300 ease-in-out w-full sm:w-auto ${service.highlighted ? "" : ""}`}
           >
             <div class="absolute top-0 right-0 bottom-0 text-9xl opacity-10 flex items-center justify-center w-full">
               <span>{service.icon}</span>
