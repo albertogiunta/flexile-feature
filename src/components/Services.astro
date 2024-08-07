@@ -1,30 +1,16 @@
 ---
-const services = [
-  {
-    name: "Ask me anything",
-    price: 100,
-    description: "1-hour video call to discuss your project",
-    timesPerformed: 20,
-    icon: "📞",
-    highlighted: false,
-  },
-  {
-    name: "1 Day MVP",
-    price: 500,
-    description: "Conversion-ready prototype of your idea in one day",
-    timesPerformed: 10,
-    icon: "🚀",
-    highlighted: true,
-  },
-  {
-    name: "3 Day Project",
-    price: 1500,
-    description: "Small project or feature implementation",
-    timesPerformed: 5,
-    icon: "💻",
-    highlighted: false,
-  },
-];
+interface Props {
+  services: Array<{
+    name: string;
+    price: number;
+    description: string;
+    timesPerformed: number;
+    icon: string;
+    highlighted: boolean;
+  }>;
+}
+
+const { services } = Astro.props;
 ---
 
 <section class="py-8 px-4 overflow-x-auto bg-white text-black w-full">

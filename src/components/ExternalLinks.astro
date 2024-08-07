@@ -1,0 +1,34 @@
+---
+interface Props {
+  links: Array<{
+    name: string;
+    url: string;
+    icon: string;
+  }>;
+}
+
+const { links } = Astro.props;
+---
+
+<section class="py-8 px-4">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6">Find me online</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+      {
+        links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-4 relative overflow-hidden border border-white rounded-full hover:bg-white hover:text-black transition-colors duration-300 flex items-center justify-between"
+          >
+            <span class="inline-flex items-center">
+              <span class="font-normal">{link.name}</span>
+            </span>
+            <span class="w-6 h-6" set:html={link.icon} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

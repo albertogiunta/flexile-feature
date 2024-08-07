@@ -1,50 +1,26 @@
 ---
-const companies = [
-  {
-    name: "Gumroad",
-    url: "https://gumroad.com",
-    verified: true,
-    earnings: "50,000$",
-    duration: "6 months",
-    features: [
-      "[flexile.com] Public Portfolio page",
-      "[helper.ai] AI-powered writing experience",
-    ],
-  },
-  {
-    name: "Holidoit",
-    url: "https://holidoit.com",
-    verified: false,
-    earnings: "12,000$",
-    duration: "2 months",
-    features: [
-      "i18n for the marketing website",
-      "AI-powered marketing side-projects",
-      "B2B dashboard",
-    ],
-  },
-  {
-    name: "Typefully",
-    url: "https://typefully.com",
-    verified: false,
-    earnings: "180,000$",
-    duration: "2 years",
-    features: [
-      "TipTap-based rich-text editor",
-      "Commenting & Notifications system",
-    ],
-  },
-];
+interface Props {
+  companies: Array<{
+    name: string;
+    url: string;
+    verified: boolean;
+    earnings: string;
+    duration: string;
+    features: string[];
+  }>;
+}
+
+const { companies } = Astro.props;
 ---
 
 <section class="py-8 px-4">
   <div class="max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold">Past collaborations</h2>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full gap-4 mt-6">
       {
         companies.map((company, index) => (
           <div
-            class={`p-6 relative overflow-hidden ${index !== companies.length - 1 ? "" : ""}`}
+            class={`px-6 relative overflow-hidden ${index !== companies.length - 1 ? "" : ""}`}
           >
             <div class="relative z-10">
               <div class="flex items-center justify-between mb-4">
