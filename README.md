@@ -26,7 +26,7 @@
 **Notes:**
 
 - I tried to reach a look&feel that felt as much like Flexile as I could make it, especially in the public page UI
-- There's no real DB attached to the page and the "Save Changes" button in the Edit modal is not implemented. I didn't think it was too useful to showcase as it'd have been a single POST request. I focused more on making it feel "at home" than full circle.
+- There's no real DB attached to the page and the "Save Changes" button in the Edit modal is not implemented. I didn't think it was too useful to showcase as it'd have been a single POST request. I focused more on making it feel "at home" than go full circle with the functionality.
 - I used [astro.build](https://astro.build/) as a meta framework, as it allows to write pages and components each in the most sensical way for their use case and I thought it might have been interesting for you to see what it could look like:
   - the public page is static, SSR and written in pure html
   - the modal is in React and rendered on the client
