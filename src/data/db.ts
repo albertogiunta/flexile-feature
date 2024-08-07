@@ -15,7 +15,7 @@ export const fetchFreelancerData = (id: string): FreelancerData | undefined => {
 const data: DataType = {
   alb: {
     name: "Alberto Giunta",
-    title: "Full Stack Web Developer",
+    title: "Full Stack Software Engineer",
     bio: "I make web products people want to use",
     totalTime: "+2 years",
     totalRevenue: "+170k$",
