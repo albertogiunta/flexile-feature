@@ -1,8 +1,10 @@
 ---
-import { fetchFreelancerData, type FreelancerData } from "../../data/db";
+import { fetchFreelancerData } from "../../data/db";
 import Services from "../../components/Services.astro";
 import Companies from "../../components/Companies.astro";
 import ExternalLinks from "../../components/ExternalLinks.astro";
+import type { FreelancerData } from "../../types";
+import EditModalComponent from "../../components/EditModalComponent";
 
 export function getStaticPaths() {
   return [{ params: { id: "alb" } }];
@@ -17,6 +19,10 @@ if (!freelancerData) {
   throw new Error(`Freelancer with id ${id} not found`);
 }
 ---
+
+<script>
+  function openModal() {}
+</script>
 
 <html lang="en">
   <head>
@@ -56,8 +62,12 @@ if (!freelancerData) {
   </head>
   <body class="bg-black text-white">
     <header class="bg-black py-4 ml-8">
-      <div class="mx-auto flex items-center">
+      <div class="mx-auto flex items-center justify-between">
         <img src="/logo.png" alt="Flexile Logo" class="h-8" />
+        <EditModalComponent
+          client:only="react"
+          freelancerData={freelancerData}
+        />
       </div>
     </header>
     <div class="mx-auto">

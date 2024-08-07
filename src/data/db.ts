@@ -17,9 +17,9 @@ const data: DataType = {
     name: "Alberto Giunta",
     title: "Full Stack Web Developer",
     bio: "I make web products people want to use",
-    totalTime: "1 year",
-    totalRevenue: "+30k$",
-    totalClients: 5,
+    totalTime: "+2 years",
+    totalRevenue: "+170k$",
+    totalClients: 3,
     totalFlexileClients: 1,
     services: [
       {
