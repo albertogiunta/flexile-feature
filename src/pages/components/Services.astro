@@ -1,0 +1,74 @@
+---
+const services = [
+  {
+    name: "Ask me anything",
+    price: 100,
+    description: "1-hour video call to discuss your project",
+    timesPerformed: 20,
+    icon: "📞",
+    highlighted: false,
+  },
+  {
+    name: "1 Day MVP",
+    price: 500,
+    description: "Conversion-ready prototype of your idea in one day",
+    timesPerformed: 10,
+    icon: "🚀",
+    highlighted: true,
+  },
+  {
+    name: "3 Day Project",
+    price: 1500,
+    description: "Small project or feature implementation",
+    timesPerformed: 5,
+    icon: "💻",
+    highlighted: false,
+  },
+];
+---
+
+<section class="py-8 px-4 overflow-x-auto bg-white text-black w-full">
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-3xl font-bold mb-6 text-center">Buy my time</h1>
+
+    <div class="flex justify-center space-x-6">
+      {
+        services.map((service) => (
+          <a
+            href="#"
+            class={`p-6 flex flex-col justify-between z-10 relative overflow-hidden transition-all duration-300 ease-in-out ${service.highlighted ? "scale-110" : ""}`}
+          >
+            <div class="absolute top-0 right-0 bottom-0 text-9xl opacity-10 flex items-center justify-center w-full">
+              <span>{service.icon}</span>
+            </div>
+            <div class="relative z-10 text-center">
+              <div class="flex items-center justify-center mb-1">
+                <h3 class="text-lg font-semibold">{service.name}</h3>
+              </div>
+              <p
+                class={`text-sm mb-2 ${service.highlighted ? "text-gray-600" : "text-gray-600"}`}
+              >
+                {service.description}
+              </p>
+            </div>
+            <div class="mt-auto relative z-10 text-center">
+              <p class="text-xl font-bold">${service.price}</p>
+            </div>
+            <button
+              class={`w-full mt-16 px-4 py-5 font-normal text-sm transition-colors rounded-full relative z-20 ${
+                service.highlighted
+                  ? "bg-[#2b8bfb] text-white hover:bg-blue-600"
+                  : "bg-black text-white hover:bg-gray-800"
+              }`}
+            >
+              Book Now
+            </button>
+            <p class="text-sm text-gray-600 mt-4 mb-2 text-center">
+              ☑️ {service.timesPerformed}+ booked already
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

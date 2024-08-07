@@ -1,0 +1,96 @@
+---
+import Services from "../components/Services.astro";
+import Companies from "../components/Companies.astro";
+import ExternalLinks from "../components/ExternalLinks.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { id: "1" } },
+    { params: { id: "2" } },
+    { params: { id: "3" } },
+  ];
+}
+
+const { id } = Astro.params;
+
+// In a real application, you would fetch freelancer data based on the ID
+const freelancerData = {
+  1: {
+    name: "Alberto Giunta",
+    title: "Full Stack Web Developer",
+    bio: "I make web products people want to use",
+    totalTime: "1 year",
+    totalRevenue: "+30k$",
+    totalClients: 5,
+    totalFlexileClients: 1,
+  },
+}[id] || {
+  name: "Unknown",
+  title: "Not specified",
+  bio: "No bio available",
+  totalTime: "0 years",
+  totalRevenue: "+0$",
+  totalClients: 0,
+  totalFlexileClients: 0,
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{freelancerData.name} - Flexile Profile</title>
+  </head>
+  <body class="bg-black text-white">
+    <div class="mx-auto py-8">
+      <section
+        class="bg-[#2b8bfb] w-screen relative left-1/2 right-1/2 -mx-[50vw] py-12 px-4"
+      >
+        <div class="max-w-4xl mx-auto text-white">
+          <p
+            class="mb-4 font-semibold bg-white text-black px-4 py-2 inline-block"
+          >
+            {freelancerData.title}
+          </p>
+          <h1 class="mb-4 text-6xl font-bold">{freelancerData.name}</h1>
+          <p class="mb-4 font-normal">{freelancerData.bio}</p>
+
+          <p class="mb-4 font-normal">
+            <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >TL;DR:</span
+            > In the last <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >{freelancerData.totalTime}</span
+            > I have been trusted with <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >{freelancerData.totalRevenue}</span
+            > by <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >{freelancerData.totalClients} clients</span
+            >
+            {
+              freelancerData.totalFlexileClients > 0 && (
+                <span>
+                  <span>({freelancerData.totalFlexileClients} Flexile)</span>
+                </span>
+              )
+            }
+          </p>
+        </div>
+      </section>
+
+      <Services />
+      <Companies />
+      <ExternalLinks />
+
+      <div class="mt-8">
+        <a href="/" class="bg-blue-500 text-black px-4 py-2 rounded">
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
