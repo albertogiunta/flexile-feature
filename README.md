@@ -6,7 +6,7 @@
 
 **Live URL**: https://ag-flexile-public-portfolio.vercel.app/f/alb
 
-The goal of this feature is:
+**Goal of this feature:**
 
 - _for flexile talents_: they can flex a unique, custom and no BS flexile shortlink with their portfolio and contact info. Them being part of the Flexile community should feel elitarian for both the talent and the company looking at the portfolio. They can sell services directly from their public page, and ideally the whole monetization flow should go through Flexile itself.
 - _for companies_: to meet the Flexile brand and product if they're not Flexile clients yet, and to have a trustworthy source of info regarding the past history and work achievements of a certain freelancer.
