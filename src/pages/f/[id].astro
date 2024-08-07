@@ -1,0 +1,106 @@
+---
+import { fetchFreelancerData, type FreelancerData } from "../../data/db";
+import Services from "../../components/Services.astro";
+import Companies from "../../components/Companies.astro";
+import ExternalLinks from "../../components/ExternalLinks.astro";
+
+export function getStaticPaths() {
+  return [{ params: { id: "alb" } }];
+}
+
+const { id } = Astro.params;
+
+const freelancerData: FreelancerData | undefined =
+  await fetchFreelancerData(id);
+
+if (!freelancerData) {
+  throw new Error(`Freelancer with id ${id} not found`);
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{freelancerData.name} - Flexile Profile</title>
+    <meta
+      name="description"
+      content={`${freelancerData.name} - ${freelancerData.title}. ${freelancerData.bio}`}
+    />
+    <meta
+      name="keywords"
+      content={`${freelancerData.name}, ${freelancerData.title}, freelancer, web development`}
+    />
+    <meta
+      property="og:title"
+      content={`${freelancerData.name} - Flexile Profile`}
+    />
+    <meta
+      property="og:description"
+      content={`${freelancerData.name} - ${freelancerData.title}. ${freelancerData.bio}`}
+    />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={`https://flexile.com/f/${id}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content={`${freelancerData.name} - Flexile Profile`}
+    />
+    <meta
+      name="twitter:description"
+      content={`${freelancerData.name} - ${freelancerData.title}. ${freelancerData.bio}`}
+    />
+    <link rel="canonical" href={`https://flexile.com/f/${id}`} />
+  </head>
+  <body class="bg-black text-white">
+    <header class="bg-black py-4 ml-8">
+      <div class="mx-auto flex items-center">
+        <img src="/logo.png" alt="Flexile Logo" class="h-8" />
+      </div>
+    </header>
+    <div class="mx-auto">
+      <section
+        class="bg-[#2b8bfb] w-screen relative left-1/2 right-1/2 -mx-[50vw] py-12 px-4"
+      >
+        <div class="max-w-4xl mx-auto text-white">
+          <p
+            class="mb-4 font-semibold bg-white text-black px-4 py-2 inline-block"
+          >
+            {freelancerData.title}
+          </p>
+          <h1 class="mb-4 text-6xl font-bold">{freelancerData.name}</h1>
+          <p class="mb-4 font-normal">{freelancerData.bio}</p>
+
+          <p class="mb-4 font-normal">
+            <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >TL;DR:</span
+            > In the last <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >{freelancerData.totalTime}</span
+            > I have been trusted with <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >{freelancerData.totalRevenue}</span
+            > by <span
+              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
+              >{freelancerData.totalClients} clients</span
+            >
+            {
+              freelancerData.totalFlexileClients > 0 && (
+                <span>
+                  <span>({freelancerData.totalFlexileClients} Flexile)</span>
+                </span>
+              )
+            }
+          </p>
+        </div>
+      </section>
+
+      <Services services={freelancerData.services} />
+      <Companies companies={freelancerData.companies} />
+      <ExternalLinks links={freelancerData.externalLinks} />
+    </div>
+  </body>
+</html>

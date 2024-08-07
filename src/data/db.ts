@@ -1,16 +1,18 @@
----
-import Services from "../../components/Services.astro";
-import Companies from "../../components/Companies.astro";
-import ExternalLinks from "../../components/ExternalLinks.astro";
+import type { DataType, FreelancerData } from "../types";
 
-export function getStaticPaths() {
-  return [{ params: { id: "alb" } }];
-}
+// Helper function to simulate a database call
+export const fetchFreelancerData = (id: string): FreelancerData | undefined => {
+  // Simulating an asynchronous database call
+  // @ts-ignore
+  return new Promise<FreelancerData | undefined>((resolve) => {
+    setTimeout(() => {
+      const freelancer = data[id];
+      resolve(freelancer);
+    }, 100); // Simulate a 100ms delay
+  });
+};
 
-const { id } = Astro.params;
-
-// Simulated backend request response
-const freelancersData = {
+const data: DataType = {
   alb: {
     name: "Alberto Giunta",
     title: "Full Stack Web Developer",
@@ -21,7 +23,7 @@ const freelancersData = {
     totalFlexileClients: 1,
     services: [
       {
-        name: "Ask me anything",
+        name: "AMA - Ask me anything",
         price: 100,
         description: "1-hour video call to discuss your project",
         timesPerformed: 20,
@@ -50,10 +52,10 @@ const freelancersData = {
         name: "Gumroad",
         url: "https://gumroad.com",
         verified: true,
-        earnings: "50,000$",
-        duration: "6 months",
+        earnings: "8,000$",
+        duration: "1 month",
         features: [
-          "[flexile.com] Public Portfolio page",
+          "[flexile.com] Freelancer Public Portfolio page",
           "[helper.ai] AI-powered writing experience",
         ],
       },
@@ -62,7 +64,7 @@ const freelancersData = {
         url: "https://holidoit.com",
         verified: false,
         earnings: "12,000$",
-        duration: "2 months",
+        duration: "4 months",
         features: [
           "i18n for the marketing website",
           "AI-powered marketing side-projects",
@@ -73,11 +75,12 @@ const freelancersData = {
         name: "Typefully",
         url: "https://typefully.com",
         verified: false,
-        earnings: "180,000$",
+        earnings: "140,000$",
         duration: "2 years",
         features: [
           "TipTap-based rich-text editor",
           "Commenting & Notifications system",
+          "Live collaboration & Drafts Sync system",
         ],
       },
     ],
@@ -94,7 +97,7 @@ const freelancersData = {
       },
       {
         name: "Twitter",
-        url: "https://twitter.com/albertogiunta",
+        url: "https://twitter.com/albigiu",
         icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>`,
       },
       {
@@ -105,67 +108,3 @@ const freelancersData = {
     ],
   },
 };
-
-// @ts-ignore
-const freelancerData = freelancersData[id];
----
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{freelancerData.name} - Flexile Profile</title>
-  </head>
-  <body class="bg-black text-white">
-    <div class="mx-auto py-8">
-      <section
-        class="bg-[#2b8bfb] w-screen relative left-1/2 right-1/2 -mx-[50vw] py-12 px-4"
-      >
-        <div class="max-w-4xl mx-auto text-white">
-          <p
-            class="mb-4 font-semibold bg-white text-black px-4 py-2 inline-block"
-          >
-            {freelancerData.title}
-          </p>
-          <h1 class="mb-4 text-6xl font-bold">{freelancerData.name}</h1>
-          <p class="mb-4 font-normal">{freelancerData.bio}</p>
-
-          <p class="mb-4 font-normal">
-            <span
-              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
-              >TL;DR:</span
-            > In the last <span
-              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
-              >{freelancerData.totalTime}</span
-            > I have been trusted with <span
-              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
-              >{freelancerData.totalRevenue}</span
-            > by <span
-              class="bg-yellow-400 text-black px-2 py-1 skew-x-[-10deg] inline-block"
-              >{freelancerData.totalClients} clients</span
-            >
-            {
-              freelancerData.totalFlexileClients > 0 && (
-                <span>
-                  <span>({freelancerData.totalFlexileClients} Flexile)</span>
-                </span>
-              )
-            }
-          </p>
-        </div>
-      </section>
-
-      <Services services={freelancerData.services} />
-      <Companies companies={freelancerData.companies} />
-      <ExternalLinks links={freelancerData.externalLinks} />
-
-      <div class="mt-8">
-        <a href="/" class="bg-blue-500 text-black px-4 py-2 rounded">
-          Back to Home
-        </a>
-      </div>
-    </div>
-  </body>
-</html>
